@@ -1,0 +1,11 @@
+zone_corecrabe.nom,region.nom,district.nom,commune.nom,fokontany.nom,village.nom,fiche.date_expedition,fiche_pecheur.date,fiche_pecheur.partenaire_peche_individu,fiche_pecheur.partenaire_peche_nombre,fiche_pecheur.consommation_crabe_poids,fiche_pecheur.consommation_crabe_nombre,fiche_pecheur.collecte_poids,fiche_pecheur.collecte_prix,fiche_pecheur.marche_local_poids,fiche_pecheur.marche_local_prix,fiche_pecheur.avec_pirogue,nom_premier_engin,nombre_premier_engin,nom_deuxieme_engin,nombre_deuxieme_engin
+Mahajanga,Boeny,Soalala,Soalala,Ankera,Sambiravo,2021-08-12,2021-08-07,seul,1,0,0,8,3000,0,0,true,"Balance (Garigary, Kiriry)",25,Non renseigné,0
+Mahajanga,Boeny,Soalala,Soalala,Ankera,Sambiravo,2021-08-12,2021-08-08,seul,1,0,0,10,3000,0,0,true,"Balance (Garigary, Kiriry)",25,Non renseigné,0
+Mahajanga,Boeny,Soalala,Soalala,Ankera,Sambiravo,2021-08-12,2021-08-09,seul,1,0,0,6,3000,0,0,true,"Balance (Garigary, Kiriry)",25,Non renseigné,0
+Mahajanga,Boeny,Soalala,Soalala,Ankera,Sambiravo,2021-08-12,2021-08-10,seul,1,0,0,4,3000,0,0,true,"Balance (Garigary, Kiriry)",25,Non renseigné,0
+Mahajanga,Boeny,Soalala,Soalala,Ankera,Sambiravo,2021-08-12,2021-08-11,seul,1,0,0,9,3000,0,0,true,"Balance (Garigary, Kiriry)",25,Non renseigné,0
+Mahajanga,Boeny,Soalala,Soalala,Ankera,Sambiravo,2021-08-12,2021-08-12,seul,1,0,0,8,3000,0,0,true,"Balance (Garigary, Kiriry)",25,Non renseigné,0
+Mahajanga,Boeny,Soalala,Soalala,Ankera,Sambiravo,2021-08-27,2021-08-22,seul,1,0,0,6,3000,0,500,true,"Balance (Garigary, Kiriry)",23,Non renseigné,0
+Mahajanga,Boeny,Soalala,Soalala,Ankera,Sambiravo,2021-08-27,2021-08-23,seul,1,0,0,8,3000,0,0,true,"Balance (Garigary, Kiriry)",23,Non renseigné,0
+Mahajanga,Boeny,Soalala,Soalala,Ankera,Sambiravo,2021-08-31,2021-08-25,amis,2,2,10,45,3000,4,1000,true,Nasse (Treko),1,"Raquette (Kipaoky, Fisahoky, Fisaoka)",1
+Mahajanga,Boeny,Soalala,Soalala,Ankera,Sambiravo,,2021-08-04,seul,1,10,14,0,0,3000,0,true,Nasse (Treko),1,Non renseigné,0

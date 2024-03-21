@@ -1,0 +1,189 @@
+<?php
+
+	
+
+	class SocieteController extends ApplicationController {
+
+		public function __construct() {
+
+			parent::__construct();
+
+			
+
+			// redéfinition des paramètres parents pour l'adapter à la vue courante
+
+			$this->root_states['title'] = 'Sociétés';
+
+			$this->root_states['custom_javascripts'] = array(
+
+				'pages/entite/societe/index.js',
+
+				'pages/entite/societe/insert-modal.js',
+
+				'pages/entite/societe/update-modal.js',
+
+			);
+
+			
+
+			// Chargement des composants statiques de bases (header, footer)
+
+			$this->application_component['header_component'] = $this->load->view('basic-structure/topbar.php', array('utilisateur' => array('nom' => $this->session->userdata('nom_utilisateur'))), true);
+
+			$this->application_component['footer_component'] = $this->load->view('basic-structure/footer.php', null, true);
+
+		}
+
+		
+
+		public function page_presentation() {
+
+			// chargement de la vue d'insertion et modification dans une variable
+
+			$current_context_state = array(
+
+				'insert_modal_component' => $this->load->view('entite/societe/insert-modal.php', array('villages' => $this->db_village->liste()), true),
+
+				'update_modal_component' => $this->load->view('entite/societe/update-modal.php', null, true),
+
+				'autorisation_creation' => $this->lib_autorisation->creation_autorise(21),
+
+				'autorisation_modification' => $this->lib_autorisation->modification_autorise(21)
+
+			);
+
+			// précision du route courant afin d'ajouter la "classe" active au lien du composant actif
+
+			$etat_menu = array(
+
+				'active_route' => 'entite/societe'
+
+			);
+
+			// rassembler les vues chargées
+
+			$this->application_component['aside_menu_component'] = $this->load->view('basic-structure/aside-menu.php', $etat_menu, true);
+
+			$this->application_component['context_component'] = $this->load->view('entite/societe/index.php', $current_context_state, true);
+
+			// affichage du composant dans la vue de base
+
+			$this->root_states['routes'] = $this->load->view('basic-structure/application.php', $this->application_component, true);
+
+			// importation des composants dans la vue racine
+
+			if ($this->lib_autorisation->visualisation_autorise(21))
+
+				$this->load->view('index.php', $this->root_states, false);
+
+		}
+
+		
+
+		public function operation_datatable() {
+
+			// requisition des données à afficher avec les contraintes
+
+			$data_query = $this->db_societe->datatable($_POST);
+
+			// chargement des données formatées
+
+			$data = array();
+
+			foreach ($data_query as $query_result) {
+
+				$bouton_modification = $this->lib_autorisation->modification_autorise(21) ? '<button class="btn btn-default update-button" data-target="#update-modal" id="update-' . $query_result['id'] . '">Modifier</button>' : '';
+
+				$bouton_suppression = $this->lib_autorisation->suppression_autorise(21) ? '<button class="btn btn-default delete-button"  data-target="' . $query_result['id'] . '">Supprimer</button>' : '';
+
+				$data[] = array(
+
+					$query_result['nom'],
+
+					$query_result['adresse'],
+					$query_result['num'],
+					$query_result['nompersonnecontact'],
+
+					'<div class="btn-group">
+
+						' . $bouton_modification . '
+
+						' . $bouton_suppression . '
+
+					</div>',
+
+				);
+
+			}
+
+			echo json_encode(array(
+
+				'draw' => intval($this->input->post('draw')),
+
+				'recordsTotal' => $this->db_societe->records_total(),
+
+				'recordsFiltered' => $this->db_societe->records_filtered($_POST),
+
+				'data' => $data
+
+			));
+
+		}
+
+		
+
+		public function operation_insertion() {
+
+			// $fisherman_length = count($_POST['nom']);
+
+			$insertion = false;
+
+            $societe = array(
+
+                'nom' => $_POST['nom'],
+                'adresse' => $_POST['adresse'],
+                'num' => $_POST['num'],
+                'nompersonnecontact' => $_POST['nomPersonneContact'],
+
+            );
+
+				$insertion = $this->db_societe->inserer($societe);
+
+			    echo json_encode(array('success' => $insertion));
+
+		}
+
+		
+
+		public function operation_mise_a_jour() {
+
+			$pecheur = array(
+
+				'nom' => $_POST['nom'],
+				'adresse' => $_POST['adresse'],
+				'num' => $_POST['num'],
+				'nompersonnecontact' => $_POST['nomPersonneContact'],
+
+			);
+
+			echo json_encode(array('success' => $this->db_societe->mettre_a_jour($pecheur, $_POST['id'])));
+
+		}
+
+		
+
+		public function operation_selection($id) {
+
+			echo json_encode($this->db_societe->selection_par_id($id));
+
+		}
+
+		
+
+		public function operation_suppression($id) {
+
+			echo json_encode($this->db_societe->supprimer($id));
+
+		}
+
+	}
